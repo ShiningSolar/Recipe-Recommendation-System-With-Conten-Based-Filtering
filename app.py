@@ -25,4 +25,6 @@ recommendations = generate_recommendations(query_embedding, dataset)
 #print("Recommendations based on the first row embedding:")
 
 df = recommendations
+# Display the DataFrame without index
+df = df.set_index('*',drop=True))
 st.dataframe(df)
