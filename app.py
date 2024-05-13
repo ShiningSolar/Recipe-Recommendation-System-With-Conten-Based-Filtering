@@ -26,5 +26,5 @@ recommendations = generate_recommendations(query_embedding, dataset)
 
 df = recommendations
 # Display the DataFrame without index
-df = df.set_index(drop=True)
+df = df.to_string(index=False)
 st.dataframe(df)
