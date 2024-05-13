@@ -1,6 +1,6 @@
 import pickle
 import streamlit as st
-import panda as pd
+import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 st.header("Recipe Recommendation System")
