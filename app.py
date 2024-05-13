@@ -17,7 +17,7 @@ def generate_recommendations(query_embedding, df, top_n=5):
     similarities = df['embedding'].apply(lambda x: calculate_cosine_similarity(query_embedding, x))
     df['similarity'] = similarities
     recommendations = df.sort_values(by='similarity', ascending=False).head(top_n)
-    return recommendations.drop(columns=['embedding', 'similarity', 'RecipeId'], index=False)
+    return recommendations.drop(columns=['embedding', 'similarity', 'RecipeId'])
 
 # Example usage: generate recommendations based on the first row embedding
 query_embedding = dataset['embedding'][1]
