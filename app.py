@@ -5,8 +5,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.neighbors import NearestNeighbors
 
 st.header("Recipe Recommendation System")
-model = pickle.load(open('artifacts/model.pkl', 'rb'))
-tfidf = pickle.load(open('artifacts/tfidf.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
+tfidf = pickle.load(open('tfidf.pkl', 'rb'))
 dataset = pickle.load(open('dataset.pkl', 'rb'))
 image = pickle.load(open('image.pkl', 'rb'))
 ingredient = pickle.load(open('ingredient.pkl', 'rb'))
