@@ -22,15 +22,19 @@ def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
     similar_items = df.iloc[indices[0][1:]]  # Menghapus item itu sendiri dari hasil
     return similar_items
 
-selected_recipe = st.selectbox(
-    "Type or select a recipe",
-    recipeName
-)
+col1, col2 = st.columns([3, 1])
+elements = st.container()
+with col1:
+    selected_recipe = st.selectbox(
+        "Type or select a recipe",
+        recipeName
+    )
 
-if st.button('Show Recommendation'):
-    st.write(selected_recipe)
-    recommendations = generate_knn_recommendations(selected_recipe, info, model)
-    st.dataframe(recommendations, hide_index = True)
+with col2:
+    if st.button('Show Recommendation'):
+        #st.write(selected_recipe)
+        recommendations = generate_knn_recommendations(selected_recipe, info, model)
+        elements.dataframe(recommendations, hide_index = True)
 
 
 # Contoh penggunaan: merekomendasikan item berdasarkan item_id 1
