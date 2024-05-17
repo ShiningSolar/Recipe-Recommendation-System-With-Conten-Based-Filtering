@@ -27,7 +27,7 @@ selected_recipe = st.selectbox(
 )
 
 if st.button('Show Recommendation'):
-    recommendations = generate_knn_recommendations(recipeName, info, model)
+    recommendations = generate_knn_recommendations(selected_recipe, info, model)
     st.dataframe(recommendations, hide_index = True)
 
 
