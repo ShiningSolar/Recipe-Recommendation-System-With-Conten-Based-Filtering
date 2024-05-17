@@ -28,13 +28,14 @@ def fragment_function():
     with cols[0]:
         selected_recipe = st.selectbox(
             "Type or select a recipe",
-            recipeName
+            recipeName,
+            None
         )
     with cols[1]:
         if st.button('Show Recommendation'):
             #st.write(selected_recipe)
             recommendations = generate_knn_recommendations(selected_recipe, info, model)
-            st.dataframe(recommendations, hide_index = True)
+    st.dataframe(recommendations, hide_index = True)
 fragment_function()
 
 
