@@ -26,8 +26,9 @@ selected_recipe = st.selectbox(
     "Type or select a recipe",
     recipeName
 )
-print(selected_recipe)
-#if st.button('Show Recommendation'):
+
+if st.button('Show Recommendation'):
+    st.write(selected_recipe)
 #    recommendations = generate_knn_recommendations(selected_recipe, info, model)
 #    st.dataframe(recommendations, hide_index = True)
 
