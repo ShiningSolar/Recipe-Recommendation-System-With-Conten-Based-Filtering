@@ -11,7 +11,7 @@ Word2Vec is used for word embedding recipe's ingredients, recipe category, and k
 
 cosine similarity is used for measuring similarity between texts that have been embedded
 
-this repo will be deployed on Streamlit. ( https://recipe-recommendation-system-with-content-based-filtering.streamlit.app/ )
+this repo will be deployed on Streamlit. ( https://recipe-recommendation-system-with-content-based-filtering-1008.streamlit.app/ )
 
 
 
