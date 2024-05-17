@@ -24,20 +24,16 @@ def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
 
 @st.experimental_fragment
 def fragment_function():
-    recommendations = []
-    cols = st.columns(2)
-    with cols[0]:
-        selected_recipe = st.selectbox(
-            "Type or select a recipe",
-            recipeName,
-            None
-        )
-    with cols[1]:
-        if st.button('Show Recommendation'):
-            #st.write(selected_recipe)
-            recommendations = generate_knn_recommendations(selected_recipe, info, model)
-            return recommendations
-    st.dataframe(recommendations, hide_index = True)
+    selected_recipe = st.selectbox(
+        "Type or select a recipe",
+        recipeName,
+        None
+    )
+    if st.button('Show Recommendation'):
+        #st.write(selected_recipe)
+        recommendations = generate_knn_recommendations(selected_recipe, info, model)
+        st.dataframe(recommendations, hide_index = True)
+
 fragment_function()
 
 
