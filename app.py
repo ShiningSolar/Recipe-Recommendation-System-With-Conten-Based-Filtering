@@ -56,7 +56,7 @@ def fragment_function():
     )
     if st.button('Show Recommendation'):
         #st.write(selected_recipe)
-        recommendations, image_url = generate_knn_recommendations(selected_recipe, info, model)
+        recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
         #st.dataframe(recommendations)
         #column = st.columns(10)
         row1 = st.columns(5)
@@ -67,7 +67,7 @@ def fragment_function():
             url = str(recipe_image[index])
             tile.header(recipe_name[index])
             if url != 'none':
-                tile.image(str(image_url[index]))
+                tile.image(url)
             index = index + 1
         
 fragment_function()
