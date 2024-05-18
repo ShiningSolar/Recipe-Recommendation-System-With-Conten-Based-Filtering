@@ -61,9 +61,9 @@ def fragment_function():
         row1 = st.columns(5)
         row2 = st.columns(5)
 
-        for i, col in enumerate(row1 + row2):
-            st.title(recommendations.Name[i])
-            st.image(image_url[i])
+        for col in row1 + row2:
+            tile = col.container(height=120)
+            tile.image(str(image_url[0]))
         
 fragment_function()
 
