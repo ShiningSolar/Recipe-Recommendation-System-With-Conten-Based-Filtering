@@ -25,9 +25,9 @@ def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
 @st.experimental_fragment
 def fragment_function():
     selected_recipe = st.selectbox(
-        label = "Type or select a recipe",
-        option = recipeName,
-        index = None,
+        "Type or select a recipe",
+        recipeName,
+        None,
         placeholder = "Type or select recipe",
         label_visibility = "collapsed"
     )
