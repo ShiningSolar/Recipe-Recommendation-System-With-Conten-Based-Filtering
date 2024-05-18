@@ -42,7 +42,7 @@ def fragment_function():
     if st.button('Show Recommendation'):
         #st.write(selected_recipe)
         recommendations = generate_knn_recommendations(selected_recipe, info, model)
-        st.dataframe(recommendation)
+        st.dataframe(recommendations)
         #column = st.columns(10)
         
 fragment_function()
