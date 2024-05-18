@@ -14,6 +14,14 @@ ingredient = pickle.load(open('ingredient.pkl', 'rb'))
 info = pickle.load(open('info.pkl', 'rb'))
 recipeName = pickle.load(open('recipeName.pkl', 'rb'))
 
+#feecth image
+def fecth_image(similar_items):
+    recipe_name = []
+    recipe_index = []
+    recipe_image = []
+    #for index in similar_items:
+
+
 # Function to generate recommendations based on knn
 def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
     #item_index = df[df['item_id'] == item_id].index[0]
@@ -34,8 +42,9 @@ def fragment_function():
     if st.button('Show Recommendation'):
         #st.write(selected_recipe)
         recommendations = generate_knn_recommendations(selected_recipe, info, model)
-        st.dataframe(recommendations, hide_index = True)
-
+        st.dataframe(recommendation)
+        #column = st.columns(10)
+        
 fragment_function()
 
 
