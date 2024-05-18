@@ -63,9 +63,9 @@ def fragment_function():
         row2 = st.columns(5)
         index = 0
         for col in row1 + row2:
-            tile = col.container(height=120)
+            tile = col.container()
             url = str(recipe_image[index])
-            tile.header(recipe_name[index])
+            tile.title(recipe_name[index])
             if url != 'none':
                 tile.image(url)
             index = index + 1
