@@ -59,16 +59,15 @@ def fragment_function():
         recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
         #st.dataframe(recommendations)
         #column = st.columns(10)
-        row1 = st.columns(5)
-        row2 = st.columns(5)
-        index = 0
-        for col in row1 + row2:
-            tile = col.container()
-            url = str(recipe_image[index])
-            tile.title(recipe_name[index])
-            if url != 'none':
-                tile.image(url)
-            index = index + 1
+        with st.container(height = 300):
+            cols = st.columns(10)
+            index = 0
+            for tile in cols:
+                url = str(recipe_image[index])
+                tile.title(recipe_name[index])
+                    if url != 'none':
+                        tile.image(url)
+                index = index + 1
         
 fragment_function()
 
