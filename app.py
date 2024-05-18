@@ -17,12 +17,13 @@ recipeName = pickle.load(open('recipeName.pkl', 'rb'))
 #fecth image
 def fecth_image(df):
     #list untuk menyimpan url image setiap resep
-    recipe_image = [] 
+    recipe_image = []
+    recipe_name = []
     
     for recipe in df['Name']:
         #mendapatkan index berdasarkan nama resep
         index = df.loc[df['Name'] == recipe].index[0]
-        
+        recipe_name.append(str(recipe))
         url = image.Images[index]
         #mengecek apakah url image kosong
         if len(url) == 0:
@@ -33,7 +34,7 @@ def fecth_image(df):
         #menyimpan url pada list
         recipe_image.append(url)
 
-    return recipe_image
+    return recipe_image, recipe_name
 
 # Function to generate recommendations based on knn
 def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
@@ -41,8 +42,8 @@ def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
     item_index = df[df['Name'] == name].index[0]
     distances, indices = knn_model.kneighbors(tfidf[item_index], n_neighbors=n_neighbors + 1)
     similar_items = df.iloc[indices[0][1:]]  # Menghapus item itu sendiri dari hasil
-    image_url = fecth_image(similar_items)
-    return similar_items, image_url
+    recipe_image, recipe_name = fecth_image(similar_items)
+    return similar_items, recipe_image, recipe_name
 
 @st.experimental_fragment
 def fragment_function():
@@ -60,10 +61,14 @@ def fragment_function():
         #column = st.columns(10)
         row1 = st.columns(5)
         row2 = st.columns(5)
-
+        index = 0
         for col in row1 + row2:
             tile = col.container(height=120)
-            tile.image(str(image_url[0]))
+            url = str(recipe_image[index])
+            tile.header(recipe_name[index])
+            if url != 'none':
+                tile.image(str(image_url[index]))
+            index = index + 1
         
 fragment_function()
 
