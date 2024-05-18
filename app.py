@@ -14,14 +14,26 @@ ingredient = pickle.load(open('ingredient.pkl', 'rb'))
 info = pickle.load(open('info.pkl', 'rb'))
 recipeName = pickle.load(open('recipeName.pkl', 'rb'))
 
-#feecth image
-def fecth_image(similar_items):
-    recipe_image = []
-    for recipe in similar_items:
-        url = image.iloc[recipe.index]['Images']
-        #how to remove c in imageurl
+#fecth image
+def fecth_image(df):
+    #list untuk menyimpan url image setiap resep
+    recipe_image = [] 
+    
+    for recipe in df['Name']:
+        #mendapatkan index berdasarkan nama resep
+        index = df.loc[df['Name'] == recipe].index[0]
+        
+        url = image.Images[index]
+        #mengecek apakah url image kosong
+        if len(url) == 0:
+            url = 'none'
+        #kalau tidak kosong, url image yang urutan pertama akan disimpan
+        else:
+            url = url[0]
+        #menyimpan url pada list
         recipe_image.append(url)
 
+    return recipe_image
 
 # Function to generate recommendations based on knn
 def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
@@ -29,7 +41,8 @@ def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
     item_index = df[df['Name'] == name].index[0]
     distances, indices = knn_model.kneighbors(tfidf[item_index], n_neighbors=n_neighbors + 1)
     similar_items = df.iloc[indices[0][1:]]  # Menghapus item itu sendiri dari hasil
-    return similar_items
+    image_url = fecth_image(similar_items)
+    return similar_items, image_url
 
 @st.experimental_fragment
 def fragment_function():
@@ -42,9 +55,16 @@ def fragment_function():
     )
     if st.button('Show Recommendation'):
         #st.write(selected_recipe)
-        recommendations = generate_knn_recommendations(selected_recipe, info, model)
-        st.dataframe(recommendations)
-        column = st.columns(10)
+        recommendations, image_url = generate_knn_recommendations(selected_recipe, info, model)
+        #st.dataframe(recommendations)
+        #column = st.columns(10)
+        row1 = st.columns(5)
+        row2 = st.columns(5)
+
+        for col in row1 + row2:
+            tile = col.container(border = True)
+            tile.title(recommendation.Name[col])
+            tile.image(image_url[col])
         
 fragment_function()
 
