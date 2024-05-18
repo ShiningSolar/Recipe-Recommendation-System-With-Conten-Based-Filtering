@@ -63,7 +63,7 @@ def fragment_function():
 
         for col in row1 + row2:
             tile = col.container(border = True)
-            tile.title(recommendation.Name[col])
+            tile.title(recommendations.Name[col])
             tile.image(image_url[col])
         
 fragment_function()
