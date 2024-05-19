@@ -72,8 +72,6 @@ def fragment_function():
                 texttest.write('success')
                 recipe_details(st.session_state[name])
             index = index + 1
-    if selected_recipe == '':
-        recommendation_box.empty()
     if st.button('test'):
         recipe_details('test')
         
