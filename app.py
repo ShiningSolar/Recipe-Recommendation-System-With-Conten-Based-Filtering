@@ -46,10 +46,12 @@ def recipe_details(name, image, index):
     st.write(name)
 
 @st.experimental_fragment
-def fragment_function():
-    recommendations = st.session_state.recommendations
-    recipe_image = st.session_state.recipe_image
-    recipe_name = st.session_state.recipe_name
+def fragment_function(recipe_image, recipe_name):
+    #recommendations = st.session_state.recommendations
+    #recipe_image = st.session_state.recipe_image
+    #recipe_name = st.session_state.recipe_name
+
+    
     texttest = st.empty()
 
     recommendation_box = st.empty()
@@ -90,10 +92,10 @@ def searchbox_view():
     button = st.button('Show Recommendation')
     if button:
         recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
-        st.session_state['recommendations']=recommendations
-        st.session_state['recipe_image']=recipe_image
-        st.session_state['recipe_name']=recipe_name
-        fragment_function()
+        #st.session_state['recommendations']=recommendations
+        #st.session_state['recipe_image']=recipe_image
+        #st.session_state['recipe_name']=recipe_name
+        fragment_function(recipe_image, recipe_name)
 
 searchbox_view()
 #fragment_function()
