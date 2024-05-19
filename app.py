@@ -35,10 +35,10 @@ def fecth_image(df):
     return recipe_image, recipe_name
 
 # Function to generate recommendations based on knn
-def generate_knn_recommendations(item_id, df, knn_model, n_neighbors=10):
+def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
     #item_index = df[df['item_id'] == item_id].index[0]
-    item_index = item_id
-    distances, indices = knn_model.kneighbors(tfidf_matrix[item_index], n_neighbors=n_neighbors + 1)
+    item_index = df[df['Name'] == name].index[0]
+    distances, indices = knn_model.kneighbors(tfidf[item_index], n_neighbors=n_neighbors + 1)
     similar_items = df.iloc[indices[0][1:]]  # Menghapus item itu sendiri dari hasil
     recipe_image, recipe_name = fecth_image(similar_items)
     return similar_items, recipe_image, recipe_name
