@@ -40,9 +40,10 @@ def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
     recipe_image, recipe_name = fecth_image(similar_items)
     return similar_items, recipe_image, recipe_name
 
-@st.experimental_dialog("Recipe details")
-def recipe_details(item):
-    st.write(item)
+@st.experimental_dialog(width = "large")
+def recipe_details(name, image, index):
+    st.image(image)
+    st.write(name)
 
 @st.experimental_fragment
 def fragment_function():
@@ -60,6 +61,8 @@ def fragment_function():
         index = 0
         for tile in row1 + row2 + row3:
             tile = tile.columns(2)
+            key_image = 'image' + str(index)
+            st.session_state[key_image] = recipe_image[index]
             tile[0] = tile[0].image(recipe_image[index])
             #tile[1] = tile[1].link_button(recipe_name[index], "https://recipe-recommendation-system-with-content-based-filtering-1008.streamlit.app/recipe_page")
             #tile[1] = tile[1].page_link("pages/recipe_page.py", label=recipe_name[index], use_container_width = True)
@@ -71,7 +74,7 @@ def fragment_function():
             tile[1].write(result)
             if result:
                 texttest.write('success')
-                recipe_details(st.session_state[key_name])
+                recipe_details(st.session_state[key_name], st.session_state[key_image], index)
             index = index + 1
     if st.button('test'):
         recipe_details('test')
