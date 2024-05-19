@@ -49,7 +49,7 @@ def fragment_function():
     recommendations = st.session_state.recommendations
     recipe_image = st.session_state.recipe_image
     recipe_name = st.session_state.recipe_name
-    #texttest = st.empty()
+    texttest = st.empty()
     '''
     selected_recipe = st.selectbox(
         "Type or select a recipe",
