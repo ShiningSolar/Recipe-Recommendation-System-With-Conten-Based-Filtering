@@ -66,11 +66,13 @@ def fragment_function():
         for tile in row1 + row2 + row3:
             tile = tile.columns(2)
             key_image = 'image' + str(index)
-            st.session_state[key_image] = recipe_image[index]
+            if key_image not in st.session_state:
+                st.session_state[key_image] = recipe_image[index]
             tile[0] = tile[0].image(recipe_image[index])
             name = str(recipe_name[index])
             key_name = 'name'+str(index)
-            result = tile[1].button(label = name, key = key_name)
+            if key_name not in st.session_state:
+                result = tile[1].button(label = name, key = key_name)
             #if "recipe_details" not in st.session_state:
             tile[1].write(result)
             if result:
@@ -92,9 +94,12 @@ def searchbox_view():
     button = st.button('Show Recommendation')
     if button:
         recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
-        st.session_state['recommendations']=recommendations
-        st.session_state['recipe_image']=recipe_image
-        st.session_state['recipe_name']=recipe_name
+        if 'recommendations' not in st.session_state:
+            st.session_state['recommendations']=recommendations
+        if 'recipe_image' not in st.session_state:
+            st.session_state['recipe_image']=recipe_image
+        if 'recipe_name' not in st.session_state:
+            st.session_state['recipe_name']=recipe_name
         fragment_function()
 
 searchbox_view()
