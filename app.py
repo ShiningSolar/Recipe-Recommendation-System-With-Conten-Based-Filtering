@@ -76,7 +76,7 @@ def fragment_function():
                 name = str(recipe_name[index])
                 #if "recipe_details" not in st.session_state:
                 if page_button.button(label = name, key = name):
-                    texttest.write(name)
+                    texttest.write(st.session_state.name)
                     #recipe_details(st.session_state[name])
                 index = index + 1
     if selected_recipe == '':
