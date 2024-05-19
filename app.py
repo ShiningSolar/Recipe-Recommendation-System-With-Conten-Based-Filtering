@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.neighbors import NearestNeighbors
 
-del st.session_state.keys()
+del st.session_state
 
 st.header("Recipe Recommendation System")
 model = pickle.load(open('model.pkl', 'rb'))
