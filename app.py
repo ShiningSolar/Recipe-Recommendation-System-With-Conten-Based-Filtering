@@ -71,7 +71,7 @@ def fragment_function():
             tile[1].write(result)
             if result:
                 texttest.write('success')
-                recipe_details(st.session_state[keyname])
+                recipe_details(st.session_state[key_name])
             index = index + 1
     if st.button('test'):
         recipe_details('test')
