@@ -59,7 +59,9 @@ def fragment_function():
         recommendation_box = st.empty()
         #column = st.columns(10)
         with recommendation_box.container(height = 450):
-            row1, row2, row3 = st.columns(2)
+            row1 = st.columns(2)
+            row2 = st.columns(2)
+            row3 = st.columns(2)
             index = 0
             for tile in row1 + row2 + row3:
                 tile = st.columns(2)
