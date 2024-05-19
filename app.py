@@ -72,11 +72,13 @@ def fragment_function():
                 tile[0] = tile[0].image(recipe_image[index])
                 #tile[1] = tile[1].link_button(recipe_name[index], "https://recipe-recommendation-system-with-content-based-filtering-1008.streamlit.app/recipe_page")
                 #tile[1] = tile[1].page_link("pages/recipe_page.py", label=recipe_name[index], use_container_width = True)
-                page_button = tile[1].empty()
+                #page_button = tile[1].empty()
                 name = str(recipe_name[index])
+                result = tile[1].button(label = name)
                 #if "recipe_details" not in st.session_state:
-                if page_button.button(label = name, key = name):
-                    texttest.write(st.session_state.name)
+                tile[1].write(result)
+                if result:
+                    texttest.write('success')
                     #recipe_details(st.session_state[name])
                 index = index + 1
     if selected_recipe == '':
