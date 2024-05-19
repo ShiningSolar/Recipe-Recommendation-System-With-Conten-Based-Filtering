@@ -61,7 +61,7 @@ def fragment_function():
         #st.dataframe(recommendations)
         #recommendation_box = st.empty()
         #column = st.columns(10)
-        with recommendation_box.container(height = 450):
+        with recommendation_box.container():
             row1 = st.columns(2)
             row2 = st.columns(2)
             row3 = st.columns(2)
@@ -69,7 +69,7 @@ def fragment_function():
             for tile in row1 + row2 + row3:
                 tile = tile.columns(2)
                 tile[0] = tile[0].image(recipe_image[index])
-                tile[1] = tile[1].markdown(recipe_name[index])
+                tile[1] = tile[1].link_button(recipe_name[index], "https://streamlit.io/gallery")
                 index = index + 1
     if selected_recipe == '':
         recommendation_box.empty()
