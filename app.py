@@ -83,6 +83,8 @@ def fragment_function():
                 index = index + 1
     if selected_recipe == '':
         recommendation_box.empty()
+    if st.button('test'):
+        recipe_details('test')
         
 fragment_function()
 
