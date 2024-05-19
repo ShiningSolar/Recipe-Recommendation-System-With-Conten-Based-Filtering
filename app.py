@@ -75,9 +75,10 @@ def fragment_function():
                 tile[0] = tile[0].image(recipe_image[index])
                 #tile[1] = tile[1].link_button(recipe_name[index], "https://recipe-recommendation-system-with-content-based-filtering-1008.streamlit.app/recipe_page")
                 #tile[1] = tile[1].page_link("pages/recipe_page.py", label=recipe_name[index], use_container_width = True)
-                page_button = tile[1].empty()
-                if page_button.button(label = recipe_name[index]):
-                    recipe_details(recipe_name[index])
+                #page_button = tile[1].empty()
+                name = recipe_name[index]
+                if tile[1].button(label = name):
+                    recipe_details(name)
                 index = index + 1
     if selected_recipe == '':
         recommendation_box.empty()
