@@ -53,11 +53,13 @@ def fragment_function():
         placeholder = "Type or select recipe",
         label_visibility = "collapsed"
     )
-    if st.button('Show Recommendation'):
+    button = st.empty()
+    recommendation_box = st.empty()
+    if button.button('Show Recommendation'):
         #st.write(selected_recipe)
         recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
         #st.dataframe(recommendations)
-        recommendation_box = st.empty()
+        #recommendation_box = st.empty()
         #column = st.columns(10)
         with recommendation_box.container(height = 450):
             row1 = st.columns(2)
@@ -69,6 +71,8 @@ def fragment_function():
                 tile[0] = tile[0].image(recipe_image[index])
                 tile[1] = tile[1].markdown(recipe_name[index])
                 index = index + 1
+    if selected_recipe == '':
+        recommendation_box.empty()
         
 fragment_function()
 
