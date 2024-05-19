@@ -75,7 +75,7 @@ def fragment_function():
                 name = str(recipe_name[index])
                 #if "recipe_details" not in st.session_state:
                 if page_button.button(label = name, key = 'recipe_button'):
-                    recipe_details(st.session_recipe_button)
+                    recipe_details(st.session_state['recipe_button'])
                 index = index + 1
     if selected_recipe == '':
         recommendation_box.empty()
