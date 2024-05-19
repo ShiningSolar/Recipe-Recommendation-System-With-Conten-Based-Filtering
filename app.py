@@ -50,26 +50,9 @@ def fragment_function():
     recipe_image = st.session_state.recipe_image
     recipe_name = st.session_state.recipe_name
     texttest = st.empty()
-    '''
-    selected_recipe = st.selectbox(
-        "Type or select a recipe",
-        recipeName,
-        None,
-        placeholder = "Type or select recipe",
-        label_visibility = "collapsed"
-    )
-    button = st.empty()
-    '''
+
     recommendation_box = st.empty()
 
-    '''
-    if button.button('Show Recommendation'):
-        #st.write(selected_recipe)
-        recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
-        #st.dataframe(recommendations)
-        #recommendation_box = st.empty()
-        #column = st.columns(10)
-    '''
     with recommendation_box.container():
         row1 = st.columns(2, gap = "medium")
         row2 = st.columns(2, gap = "medium")
@@ -87,10 +70,10 @@ def fragment_function():
             tile[1].write(result)
             if result:
                 texttest.write('success')
-                #recipe_details(st.session_state[name])
+                recipe_details(st.session_state[name])
             index = index + 1
-    #if selected_recipe == '':
-    #    recommendation_box.empty()
+    if selected_recipe == '':
+        recommendation_box.empty()
     if st.button('test'):
         recipe_details('test')
         
