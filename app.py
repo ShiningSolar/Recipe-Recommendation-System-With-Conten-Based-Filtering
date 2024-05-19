@@ -27,9 +27,6 @@ def fecth_image(df):
         recipe_name.append(str(recipe))
         url = image.Images[index]
         url = url[0]
-        #mengecek apakah url image lebih dari 1 item
-        #if len(url) > 1:
-        #    url = url[0]
         #menyimpan url pada list
         recipe_image.append(str(url))
 
@@ -37,7 +34,6 @@ def fecth_image(df):
 
 # Function to generate recommendations based on knn
 def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
-    #item_index = df[df['item_id'] == item_id].index[0]
     item_index = df[df['Name'] == name].index[0]
     distances, indices = knn_model.kneighbors(tfidf[item_index], n_neighbors=n_neighbors + 1)
     similar_items = df.iloc[indices[0][1:]]  # Menghapus item itu sendiri dari hasil
@@ -78,8 +74,8 @@ def fragment_function():
                 page_button = tile[1].empty()
                 name = str(recipe_name[index])
                 #if "recipe_details" not in st.session_state:
-                if page_button.button(label = name):
-                    recipe_details(name)
+                if page_button.button(label = name, key = 'recipe_button'):
+                    recipe_details(st.session_recipe_button)
                 index = index + 1
     if selected_recipe == '':
         recommendation_box.empty()
