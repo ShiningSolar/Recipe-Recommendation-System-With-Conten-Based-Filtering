@@ -26,9 +26,10 @@ def fecth_image(df):
         index = df.loc[df['Name'] == recipe].index[0]
         recipe_name.append(str(recipe))
         url = image.Images[index]
+        url = url[0]
         #mengecek apakah url image lebih dari 1 item
-        if len(url) > 1:
-            url = url[0]
+        #if len(url) > 1:
+        #    url = url[0]
         #menyimpan url pada list
         recipe_image.append(str(url))
 
