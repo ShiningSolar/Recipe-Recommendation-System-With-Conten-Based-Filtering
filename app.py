@@ -64,9 +64,9 @@ def fragment_function():
             row3 = st.columns(2)
             index = 0
             for tile in row1 + row2 + row3:
-                tile = st.columns(2)
-                tile[0] = st.image(recipe_image[index])
-                tile[1] = st.markdown(recipe_name[index])
+                tile = tile.columns(2)
+                tile[0] = tile[0].image(recipe_image[index])
+                tile[1] = tile[1].markdown(recipe_name[index])
                 index = index + 1
         
 fragment_function()
