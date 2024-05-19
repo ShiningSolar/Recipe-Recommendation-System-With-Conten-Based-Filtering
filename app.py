@@ -40,7 +40,7 @@ def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
     recipe_image, recipe_name = fecth_image(similar_items)
     return similar_items, recipe_image, recipe_name
 
-@st.experimental_dialog(width = "large")
+@st.experimental_dialog("Recipe Details",width = "large")
 def recipe_details(name, image, index):
     st.image(image)
     st.write(name)
