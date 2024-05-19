@@ -5,7 +5,6 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.neighbors import NearestNeighbors
 
-
 st.header("Recipe Recommendation System")
 model = pickle.load(open('model.pkl', 'rb'))
 tfidf = pickle.load(open('tfidf.pkl', 'rb'))
@@ -59,15 +58,15 @@ def fragment_function():
         row1 = st.columns(2, gap = "medium")
         row2 = st.columns(2, gap = "medium")
         row3 = st.columns(2, gap = "medium")
-        if 'index' not in st.session_state:
-            st.session_state['index'] = 0
-        index = st.session_state['index']
-        
+        index = 0
         for tile in row1 + row2 + row3:
             tile = tile.columns(2)
             key_image = 'image' + str(index)
             st.session_state[key_image] = recipe_image[index]
             tile[0] = tile[0].image(recipe_image[index])
+            #tile[1] = tile[1].link_button(recipe_name[index], "https://recipe-recommendation-system-with-content-based-filtering-1008.streamlit.app/recipe_page")
+            #tile[1] = tile[1].page_link("pages/recipe_page.py", label=recipe_name[index], use_container_width = True)
+            #page_button = tile[1].empty()
             name = str(recipe_name[index])
             key_name = 'name'+str(index)
             result = tile[1].button(label = name, key = key_name)
@@ -76,8 +75,7 @@ def fragment_function():
             if result:
                 texttest.write('success')
                 recipe_details(st.session_state[key_name], st.session_state[key_image], index)
-            st.session_state.index = index + 1
-            
+            index = index + 1
     if st.button('test'):
         recipe_details('test')
         
