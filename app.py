@@ -20,27 +20,25 @@ def fecth_image(df):
     recipe_image = []
     recipe_name = []
     
+    
     for recipe in df['Name']:
         #mendapatkan index berdasarkan nama resep
         index = df.loc[df['Name'] == recipe].index[0]
         recipe_name.append(str(recipe))
         url = image.Images[index]
-        #mengecek apakah url image kosong
-        if len(url) == 0:
-            url = 'none'
-        #kalau tidak kosong, url image yang urutan pertama akan disimpan
-        else:
+        #mengecek apakah url image lebih dari 1 item
+        if len(url) > 1:
             url = url[0]
         #menyimpan url pada list
-        recipe_image.append(url)
+        recipe_image.append(str(url))
 
     return recipe_image, recipe_name
 
 # Function to generate recommendations based on knn
-def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
+def generate_knn_recommendations(item_id, df, knn_model, n_neighbors=10):
     #item_index = df[df['item_id'] == item_id].index[0]
-    item_index = df[df['Name'] == name].index[0]
-    distances, indices = knn_model.kneighbors(tfidf[item_index], n_neighbors=n_neighbors + 1)
+    item_index = item_id
+    distances, indices = knn_model.kneighbors(tfidf_matrix[item_index], n_neighbors=n_neighbors + 1)
     similar_items = df.iloc[indices[0][1:]]  # Menghapus item itu sendiri dari hasil
     recipe_image, recipe_name = fecth_image(similar_items)
     return similar_items, recipe_image, recipe_name
@@ -58,15 +56,15 @@ def fragment_function():
         #st.write(selected_recipe)
         recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
         #st.dataframe(recommendations)
+        recommendation_box = st.empty()
         #column = st.columns(10)
-        with st.container(height = 150):
-            cols = st.columns(10)
+        with recommendation_box.container(height = 450):
+            row1, row2, row3 = st.columns(2)
             index = 0
-            for tile in cols:
-                url = str(recipe_image[index])
-                tile.markdown(recipe_name[index])
-                if url != 'none':
-                    tile.image(url, use_column_width = True)
+            for tile in row1 + row2 + row3:
+                tile = st.columns(2)
+                tile[0] = st.image(recipe_image[index])
+                tile[1] = st.markdown(recipe_name[index])
                 index = index + 1
         
 fragment_function()
