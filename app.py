@@ -65,7 +65,7 @@ def fragment_function():
             #tile[1] = tile[1].page_link("pages/recipe_page.py", label=recipe_name[index], use_container_width = True)
             #page_button = tile[1].empty()
             name = str(recipe_name[index])
-            key_name = str('name'+index)
+            key_name = 'name'+str(index)
             result = tile[1].button(label = name, key = key_name)
             #if "recipe_details" not in st.session_state:
             tile[1].write(result)
