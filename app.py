@@ -14,9 +14,8 @@ ingredient = pickle.load(open('ingredient.pkl', 'rb'))
 info = pickle.load(open('info.pkl', 'rb'))
 recipeName = pickle.load(open('recipeName.pkl', 'rb'))
 
-for key in st.session_state.keys():
-    del st.session_state[key]
 st.session_state
+
 #fecth image
 def fecth_image(df):
     #list untuk menyimpan url image setiap resep
