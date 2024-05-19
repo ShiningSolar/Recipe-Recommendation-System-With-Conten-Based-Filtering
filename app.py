@@ -46,36 +46,7 @@ def recipe_details(item):
 
 @st.experimental_fragment
 def fragment_function():
-    recommendations = st.session_state.recommendations
-    recipe_image = st.session_state.recipe_image
-    recipe_name = st.session_state.recipe_name
     texttest = st.empty()
-
-    recommendation_box = st.empty()
-
-    with recommendation_box.container():
-        row1 = st.columns(2, gap = "medium")
-        row2 = st.columns(2, gap = "medium")
-        row3 = st.columns(2, gap = "medium")
-        index = 0
-        for tile in row1 + row2 + row3:
-            tile = tile.columns(2)
-            tile[0] = tile[0].image(recipe_image[index])
-            #tile[1] = tile[1].link_button(recipe_name[index], "https://recipe-recommendation-system-with-content-based-filtering-1008.streamlit.app/recipe_page")
-            #tile[1] = tile[1].page_link("pages/recipe_page.py", label=recipe_name[index], use_container_width = True)
-            #page_button = tile[1].empty()
-            name = str(recipe_name[index])
-            result = tile[1].button(label = name, key = 'name')
-            #if "recipe_details" not in st.session_state:
-            tile[1].write(result)
-            if result:
-                texttest.write('success')
-                recipe_details(st.session_state.name)
-            index = index + 1
-    if st.button('test'):
-        recipe_details('test')
-        
-def searchbox_view():
     selected_recipe = st.selectbox(
         "Type or select a recipe",
         recipeName,
@@ -83,16 +54,39 @@ def searchbox_view():
         placeholder = "Type or select recipe",
         label_visibility = "collapsed"
     )
-    button = st.button('Show Recommendation')
-    if button:
+    button = st.empty()
+    recommendation_box = st.empty()
+    if button.button('Show Recommendation'):
+        #st.write(selected_recipe)
         recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
-        st.session_state['recommendations']=recommendations
-        st.session_state['recipe_image']=recipe_image
-        st.session_state['recipe_name']=recipe_name
-        fragment_function()
-
-searchbox_view()
-#fragment_function()
+        #st.dataframe(recommendations)
+        #recommendation_box = st.empty()
+        #column = st.columns(10)
+        with recommendation_box.container():
+            row1 = st.columns(2, gap = "medium")
+            row2 = st.columns(2, gap = "medium")
+            row3 = st.columns(2, gap = "medium")
+            index = 0
+            for tile in row1 + row2 + row3:
+                tile = tile.columns(2)
+                tile[0] = tile[0].image(recipe_image[index])
+                #tile[1] = tile[1].link_button(recipe_name[index], "https://recipe-recommendation-system-with-content-based-filtering-1008.streamlit.app/recipe_page")
+                #tile[1] = tile[1].page_link("pages/recipe_page.py", label=recipe_name[index], use_container_width = True)
+                #page_button = tile[1].empty()
+                name = str(recipe_name[index])
+                result = tile[1].button(label = name)
+                #if "recipe_details" not in st.session_state:
+                tile[1].write(result)
+                if result:
+                    texttest.write('success')
+                    #recipe_details(st.session_state[name])
+                index = index + 1
+    #if selected_recipe == '':
+    #    recommendation_box.empty()
+    if st.button('test'):
+        recipe_details('test')
+        
+fragment_function()
 
 
     
