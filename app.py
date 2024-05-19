@@ -46,6 +46,7 @@ def recipe_details(item):
 
 @st.experimental_fragment
 def fragment_function():
+    texttest = st.empty()
     selected_recipe = st.selectbox(
         "Type or select a recipe",
         recipeName,
@@ -75,7 +76,8 @@ def fragment_function():
                 name = str(recipe_name[index])
                 #if "recipe_details" not in st.session_state:
                 if page_button.button(label = name, key = name):
-                    recipe_details(st.session_state[name])
+                    texttest.write(name)
+                    #recipe_details(st.session_state[name])
                 index = index + 1
     if selected_recipe == '':
         recommendation_box.empty()
