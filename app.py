@@ -15,7 +15,6 @@ info = pickle.load(open('info.pkl', 'rb'))
 recipeName = pickle.load(open('recipeName.pkl', 'rb'))
 
 st.session_state
-
 #fecth image
 def fecth_image(df):
     #list untuk menyimpan url image setiap resep
@@ -45,7 +44,7 @@ def generate_knn_recommendations(name, df, knn_model, n_neighbors=10):
 @st.experimental_dialog("Recipe Details",width = "large")
 def recipe_details(name, image, index):
     st.image(image)
-    st.header(name)
+    st.write(name)
 
 @st.experimental_fragment
 def fragment_function():
@@ -60,19 +59,17 @@ def fragment_function():
         row1 = st.columns(2, gap = "medium")
         row2 = st.columns(2, gap = "medium")
         row3 = st.columns(2, gap = "medium")
-        #if 'index' not in st.session_state:
-        st.session_state['index'] = 0
+        if 'index' not in st.session_state:
+            st.session_state['index'] = 0
         index = st.session_state['index']
         
         for tile in row1 + row2 + row3:
             tile = tile.columns(2)
             key_image = 'image' + str(index)
-            #if key_image not in st.session_state:
             st.session_state[key_image] = recipe_image[index]
             tile[0] = tile[0].image(recipe_image[index])
             name = str(recipe_name[index])
             key_name = 'name'+str(index)
-            #if key_name not in st.session_state:
             result = tile[1].button(label = name, key = key_name)
             #if "recipe_details" not in st.session_state:
             tile[1].write(result)
@@ -95,11 +92,8 @@ def searchbox_view():
     button = st.button('Show Recommendation')
     if button:
         recommendations, recipe_image, recipe_name = generate_knn_recommendations(selected_recipe, info, model)
-        #if 'recommendations' not in st.session_state:
         st.session_state['recommendations']=recommendations
-        #if 'recipe_image' not in st.session_state:
         st.session_state['recipe_image']=recipe_image
-        #if 'recipe_name' not in st.session_state:
         st.session_state['recipe_name']=recipe_name
         fragment_function()
 
@@ -117,6 +111,5 @@ searchbox_view()
 #df = recommendations
 # Display the DataFrame without index
 #df = df.style.hide_index()
-
 
 
